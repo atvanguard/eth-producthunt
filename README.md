@@ -10,3 +10,13 @@ A decentralized product hunt.
 - Delete a product
 
 The above operations obviously require gas.
+
+### Development
+```shell
+ganache-cli
+
+npm i
+npm run compile
+npm run migrate
+npm test
+```

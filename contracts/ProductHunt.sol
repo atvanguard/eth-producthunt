@@ -2,7 +2,7 @@ pragma solidity ^0.4.24;
 
 contract ProductHunt {
   address public owner;
-  uint256 counter;
+  uint256 public counter;
 
   constructor() public {
     owner = msg.sender;
@@ -33,6 +33,11 @@ contract ProductHunt {
 
   mapping(uint256 => Product) public productMapping;
 
+  event NewProduct(address indexed maker, uint256 indexed id, string ipfsHash);
+  event Voted(uint256 indexed id);
+  event DownVoted(uint256 indexed id);
+  event DeleteProduct(uint256 indexed id);
+
   function newProduct(string ipfsHash) public {
     uint256 id = generateProductId();
     Product memory p = Product(
@@ -40,16 +45,19 @@ contract ProductHunt {
       ipfsHash,
       new address[](0),
       new address[](0));
+    emit NewProduct(msg.sender, id, ipfsHash);
     productMapping[id] = p;
   }
 
   function vote(uint256 id) public validProduct(id) hasNotVoted(id, msg.sender) {
     Product storage product = productMapping[id];
+    emit Voted(id);
     product.votes.push(msg.sender);
   }
 
   function downVote(uint256 id) public validProduct(id) hasNotVoted(id, msg.sender) {
     Product storage product = productMapping[id];
+    emit DownVoted(id);
     product.downVotes.push(msg.sender);
   }
 
@@ -65,6 +73,7 @@ contract ProductHunt {
   function deleteProduct(uint256 id) public validProduct(id) {
     Product storage product = productMapping[id];
     require(product.maker == msg.sender);
+    emit DeleteProduct(id);
     delete productMapping[id];
   }
 

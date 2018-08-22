@@ -1,0 +1,29 @@
+{
+  "name": "eth-producthunt",
+  "version": "1.0.0",
+  "description": "A decentralized product hunt.",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "truffle": "^4.1.14"
+  },
+  "scripts": {
+    "compile": "truffle compile",
+    "migrate": "truffle migrate --reset",
+    "test": "truffle test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atvanguard/eth-producthunt.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atvanguard/eth-producthunt/issues"
+  },
+  "homepage": "https://github.com/atvanguard/eth-producthunt#readme"
+}
